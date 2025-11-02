@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://nc7ybiv87k3o"]
+[gd_scene load_steps=5 format=3 uid="uid://nc7ybiv87k3o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yn3el"]
-sky_top_color = Color(0.12826, 0.0483016, 0.380092, 1)
-sky_horizon_color = Color(0.656873, 0.365588, 0.243926, 1)
-ground_bottom_color = Color(0.326719, 0.0233709, 0.18908, 1)
+sky_top_color = Color(0.552941, 0.572549, 0.607843, 1)
+sky_horizon_color = Color(0.670588, 0.67451, 0.701961, 1)
+ground_bottom_color = Color(0.427451, 0.435294, 0.501961, 1)
 
 [sub_resource type="Sky" id="Sky_ef2dv"]
 sky_material = SubResource("ProceduralSkyMaterial_yn3el")
@@ -11,6 +11,12 @@ sky_material = SubResource("ProceduralSkyMaterial_yn3el")
 [sub_resource type="Environment" id="Environment_6upkm"]
 background_mode = 2
 sky = SubResource("Sky_ef2dv")
+fog_mode = 1
+fog_density = 1.0
+fog_depth_end = 30.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_604j3"]
+size = Vector2(50, 50)
 
 [node name="Node3D" type="Node3D"]
 
@@ -19,3 +25,6 @@ environment = SubResource("Environment_6upkm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.926863, -0.0796386, -0.366855, 0.375399, 0.196628, 0.905766, 2.68401e-09, -0.977238, 0.212144, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_604j3")
