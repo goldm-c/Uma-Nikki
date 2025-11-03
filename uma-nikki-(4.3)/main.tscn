@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dab0qrcuyc21w"]
+
+[ext_resource type="PackedScene" uid="uid://nc7ybiv87k3o" path="res://world.tscn" id="1_hkyct"]
+[ext_resource type="PackedScene" uid="uid://ficbtc5b2qt8" path="res://uma.tscn" id="2_ntxyv"]
+[ext_resource type="PackedScene" uid="uid://drflp18kb1bgm" path="res://uma corn.gltf" id="3_fguvb"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="World" parent="." instance=ExtResource("1_hkyct")]
+
+[node name="Uma" parent="." instance=ExtResource("2_ntxyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="blockbench_export" parent="." instance=ExtResource("3_fguvb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)

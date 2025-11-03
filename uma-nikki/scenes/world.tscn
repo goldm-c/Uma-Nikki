@@ -1,0 +1,173 @@
+[gd_scene load_steps=22 format=3 uid="uid://nc7ybiv87k3o"]
+
+[ext_resource type="AudioStream" uid="uid://ub20wnqv7gcd" path="res://audio/rain.ogg" id="1_655l2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yn3el"]
+sky_top_color = Color(0.552941, 0.572549, 0.607843, 1)
+sky_horizon_color = Color(0.670588, 0.67451, 0.701961, 1)
+ground_bottom_color = Color(0.427451, 0.435294, 0.501961, 1)
+
+[sub_resource type="Sky" id="Sky_ef2dv"]
+sky_material = SubResource("ProceduralSkyMaterial_yn3el")
+
+[sub_resource type="Environment" id="Environment_6upkm"]
+background_mode = 2
+sky = SubResource("Sky_ef2dv")
+fog_depth_end = 30.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0.529412, 0.537255, 0.588235, 1)
+volumetric_fog_emission = Color(0.4176, 0.41864, 0.48, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvk4x"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.529412, 0.537255, 0.588235, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_604j3"]
+material = SubResource("StandardMaterial3D_tvk4x")
+size = Vector2(200, 200)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vfy6s"]
+emission_shape_offset = Vector3(25, 15, 25)
+emission_shape_scale = Vector3(30, 1, 30)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, -1, 0)
+spread = 1.5
+initial_velocity_min = 25.0
+initial_velocity_max = 35.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="Curve" id="Curve_ptmyq"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.0197802), 1.56141, 1.56141, 0, 0, Vector2(0.4, 0.0725275), -0.336264, -0.336264, 0, 0, Vector2(0.982353, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqvgv"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.82, 0.82, 0.82, 0.356863)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_8fdn5"]
+material = SubResource("StandardMaterial3D_eqvgv")
+size = 0.7
+sections = 3
+section_length = 0.1
+curve = SubResource("Curve_ptmyq")
+
+[sub_resource type="Curve" id="Curve_hci0n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_itecu"]
+curve = SubResource("Curve_hci0n")
+
+[sub_resource type="Curve" id="Curve_7c8od"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.649921, 0, 0, Vector2(1, 0.237363), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kkmkl"]
+curve = SubResource("Curve_7c8od")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rcey8"]
+emission_shape_scale = Vector3(1, 0.1, 1)
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_kkmkl")
+alpha_curve = SubResource("CurveTexture_itecu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cnhp"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.82, 0.82, 0.82, 0.25490198)
+
+[sub_resource type="TorusMesh" id="TorusMesh_axe5p"]
+lightmap_size_hint = Vector2i(33, 9)
+material = SubResource("StandardMaterial3D_1cnhp")
+inner_radius = 0.578
+rings = 8
+ring_segments = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj7yv"]
+size = Vector3(1, 8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fj7yv"]
+size = Vector3(1, 8, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(3, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3sb7"]
+size = Vector3(3, 1, 4)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6upkm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.926863, -0.0796386, -0.366855, 0.375399, 0.196628, 0.905766, 2.68401e-09, -0.977238, 0.212144, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_604j3")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D"]
+size = Vector3(52.61, 0, 50)
+
+[node name="RainParticle" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8554, 3.61007, -21.0975)
+amount = 400
+sub_emitter = NodePath("../PuddleParticle")
+lifetime = 0.7
+fixed_fps = 90
+collision_base_size = 0.1
+visibility_aabb = AABB(-4, -4, -4, 50, 20, 50)
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_vfy6s")
+draw_pass_1 = SubResource("RibbonTrailMesh_8fdn5")
+
+[node name="PuddleParticle" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.21527, 0)
+emitting = false
+amount = 2000
+lifetime = 0.7
+one_shot = true
+visibility_aabb = AABB(-4, -4, -4, 30, 3, 30)
+process_material = SubResource("ParticleProcessMaterial_rcey8")
+draw_pass_1 = SubResource("TorusMesh_axe5p")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_655l2")
+volume_db = -6.558
+autoplay = true
+
+[node name="Block2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.052966, 3.5937247, 6.5878415)
+mesh = SubResource("BoxMesh_fj7yv")
+skeleton = NodePath("../Block")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/StaticBody3D"]
+shape = SubResource("BoxShape3D_fj7yv")
+
+[node name="Block" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4641123, 0.18620014, 0)
+mesh = SubResource("BoxMesh_f3sb7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
+shape = SubResource("BoxShape3D_f3sb7")
