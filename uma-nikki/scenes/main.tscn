@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dab0qrcuyc21w"]
 
 [ext_resource type="PackedScene" uid="uid://nc7ybiv87k3o" path="res://scenes/world.tscn" id="1_jyhfs"]
-[ext_resource type="Script" uid="uid://c8eywfti2slb7" path="res://scenes/main.gd" id="1_tbgi4"]
+[ext_resource type="Script" uid="uid://c8eywfti2slb7" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://ficbtc5b2qt8" path="res://scenes/uma.tscn" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://drflp18kb1bgm" path="res://models/uma corn.gltf" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://hbm4et70i572" path="res://scripts/fps.gd" id="4_o6xl0"]
@@ -13,6 +13,7 @@ size = Vector3(0.63635254, 1.6635742, 1)
 script = ExtResource("1_tbgi4")
 
 [node name="Node2D" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="fps" type="Label" parent="Node2D"]
 offset_right = 40.0
@@ -20,6 +21,7 @@ offset_bottom = 23.0
 script = ExtResource("4_o6xl0")
 
 [node name="Node3D" type="Node3D" parent="."]
+unique_name_in_owner = true
 
 [node name="World" parent="Node3D" instance=ExtResource("1_jyhfs")]
 

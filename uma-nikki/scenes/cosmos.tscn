@@ -1,6 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm2ufoe2h2mnk"]
+[gd_scene load_steps=7 format=3 uid="uid://bm2ufoe2h2mnk"]
 
 [ext_resource type="Texture2D" uid="uid://d2jfe8wupa31p" path="res://textures/cosmos.png" id="1_ewdkh"]
+[ext_resource type="Script" uid="uid://b7ige01qa43up" path="res://scripts/cosmos_camera.gd" id="2_8nrjn"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8nrjn"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8nrjn"]
 panorama = ExtResource("1_ewdkh")
@@ -13,20 +17,19 @@ sky_material = SubResource("PanoramaSkyMaterial_8nrjn")
 background_mode = 2
 sky = SubResource("Sky_1onoa")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ewdkh"]
-viewport_path = NodePath("SubViewport")
-
-[node name="Node" type="Node"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6mbfo")
+[node name="Sprite3D" type="Sprite3D"]
+transform = Transform3D(0.88044655, 0, 0, 0, 0.88044655, 0, 0, 0, 0.88044655, 0, 0, 0)
+pixel_size = 0.005
+texture = SubResource("ViewportTexture_8nrjn")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
 size_2d_override_stretch = true
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0)
-fov = 135.6
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_6mbfo")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-texture = SubResource("ViewportTexture_ewdkh")
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5124979)
+fov = 100.0
+script = ExtResource("2_8nrjn")

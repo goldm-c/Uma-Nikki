@@ -1,7 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://c271a1lw68kf3"]
+[gd_scene load_steps=11 format=3 uid="uid://c271a1lw68kf3"]
 
 [ext_resource type="PackedScene" uid="uid://px11iv1bxigu" path="res://models/door corn.gltf" id="1_hpvv5"]
-[ext_resource type="Script" uid="uid://bacncliuhv3x4" path="res://scenes/door.gd" id="2_83dcw"]
+[ext_resource type="Script" uid="uid://bacncliuhv3x4" path="res://scripts/door.gd" id="2_83dcw"]
+[ext_resource type="PackedScene" uid="uid://bm2ufoe2h2mnk" path="res://scenes/cosmos.tscn" id="3_83dcw"]
+[ext_resource type="Texture2D" uid="uid://cbfnymv8sxvha" path="res://textures/door corn_0.png" id="3_la1wf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18pbm"]
+transparency = 4
+albedo_texture = ExtResource("3_la1wf")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5w8r"]
+transparency = 4
+albedo_texture = ExtResource("3_la1wf")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la1wf"]
+transparency = 4
+albedo_texture = ExtResource("3_la1wf")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hpvv5"]
 size = Vector3(1.9, 2.8589416, 0.3)
@@ -9,32 +26,60 @@ size = Vector3(1.9, 2.8589416, 0.3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_la1wf"]
 size = Vector3(1.5, 1.0166321, 2)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_la1wf"]
+viewport_path = NodePath("SubViewport")
+
 [node name="Door" instance=ExtResource("1_hpvv5")]
 script = ExtResource("2_83dcw")
+
+[node name="door body" parent="door" index="0"]
+material_override = SubResource("StandardMaterial3D_18pbm")
+
+[node name="handle" parent="door" index="1"]
+material_override = SubResource("StandardMaterial3D_q5w8r")
+
+[node name="doorframe" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_la1wf")
 
 [node name="AnimationPlayer" parent="." index="2"]
 unique_name_in_owner = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4612764, 0)
 shape = SubResource("BoxShape3D_hpvv5")
 
-[node name="DoorCam" type="Camera3D" parent="." index="4"]
+[node name="DoorCam1" type="Camera3D" parent="." index="4"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.96637154, 0.25714964, 0, -0.25714964, 0.96637154, 0, 2.5338788, 5.02637)
 
-[node name="Area3D" type="Area3D" parent="." index="5"]
-visible = false
+[node name="DoorCam2" type="Camera3D" parent="." index="5"]
+unique_name_in_owner = true
+transform = Transform3D(-1, -2.2479263e-08, 8.4483275e-08, 0, 0.96637607, 0.2571328, -8.742278e-08, 0.2571328, -0.96637607, 0, 2.534, -5.026)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+[node name="Area1" type="Area3D" parent="." index="6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area1" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40601933, 0.98075616)
 shape = SubResource("BoxShape3D_la1wf")
 
-[node name="Marker3D" type="Marker3D" parent="." index="6"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9900397)
+[node name="Area2" type="Area3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.0011783)
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40601933, 0.98075616)
+shape = SubResource("BoxShape3D_la1wf")
+
+[node name="Sprite3D" parent="." index="8" instance=ExtResource("3_83dcw")]
+transform = Transform3D(1.06, 0, 0, 0, 1.06, 0, 0, 0, 1.06, 0, 1.3134538, 0)
+sorting_offset = -1.5
+texture = SubResource("ViewportTexture_la1wf")
+region_enabled = true
+region_rect = Rect2(87.87836, 0, 329.42255, 512)
+
+[connection signal="body_entered" from="Area1" to="." method="_on_area1_3d_body_entered"]
+[connection signal="body_exited" from="Area1" to="." method="_on_area1_3d_body_exited"]
+[connection signal="body_entered" from="Area2" to="." method="_on_area2_body_entered"]
+[connection signal="body_exited" from="Area2" to="." method="_on_area2_body_exited"]

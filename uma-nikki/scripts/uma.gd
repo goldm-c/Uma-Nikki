@@ -21,11 +21,9 @@ var _last_movement_direction := Vector3.BACK
 
 func makeUmaCameraCurrent():
 	if first_person: 
-		first_person = false
-		_camera.make_current()
-	else: 
-		first_person = true
 		_camera_1p.make_current()
+	else: 
+		_camera.make_current()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
@@ -38,7 +36,13 @@ func _input(event: InputEvent) -> void:
 		else: running = 1.0
 		
 	if event.is_action_pressed("camera_switch"):
-		makeUmaCameraCurrent()
+		if first_person: 
+			first_person = false
+			makeUmaCameraCurrent()
+		else: 
+			first_person = true
+			print("blaarr")
+			makeUmaCameraCurrent()
 
 func _unhandled_input(event: InputEvent) -> void: #Do not move camera when tabbed out.
 	var is_camera_motion := (
