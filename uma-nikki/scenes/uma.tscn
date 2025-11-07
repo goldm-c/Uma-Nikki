@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=4 uid="uid://ficbtc5b2qt8"]
+[gd_scene load_steps=26 format=4 uid="uid://ficbtc5b2qt8"]
 
 [ext_resource type="Script" uid="uid://bfkg3jskid2ca" path="res://scripts/uma.gd" id="1_aa6sl"]
+[ext_resource type="Material" uid="uid://bynysbfkkiena" path="res://materials/uma.tres" id="2_nbkge"]
 [ext_resource type="AudioStream" uid="uid://bjryd67ll77ek" path="res://audio/clip.ogg" id="3_ut8xy"]
 [ext_resource type="AudioStream" uid="uid://cgybo1g2ndal7" path="res://audio/clop.ogg" id="4_2oiaa"]
 
@@ -367,6 +368,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3125, 0)
 
 [node name="beveled_cuboid" type="MeshInstance3D" parent="uma/body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.375, -0.3125)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_3jtxa")
 skeleton = NodePath("")
 
@@ -375,6 +377,7 @@ transform = Transform3D(1, 0, 0, 0, 0.999032, 0.0439787, 0, -0.0439787, 0.999032
 
 [node name="head" type="MeshInstance3D" parent="uma/body/head2"]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.25, 0.3125, 0.625)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_tc77d")
 skeleton = NodePath("")
 
@@ -383,6 +386,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1.25)
 
 [node name="cuboid" type="MeshInstance3D" parent="uma/body/tail"]
 transform = Transform3D(1, 0, 0, 0, 0.887011, -0.461749, 0, 0.461749, 0.887011, 0, -0.5, -0.375)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_qciee")
 skeleton = NodePath("")
 
@@ -391,6 +395,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.3125, 0.0625)
 
 [node name="cylinder" type="MeshInstance3D" parent="uma/body/fl_leg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0625, -0.6875, -0.0625)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_g61os")
 skeleton = NodePath("")
 
@@ -399,6 +404,7 @@ transform = Transform3D(1, 0, 0, 0, 0.999762, -0.0218149, 0, 0.0218149, 0.999762
 
 [node name="cylinder2" type="MeshInstance3D" parent="uma/body/fr_leg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0625, -0.6875, -0.0625)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_fogfn")
 skeleton = NodePath("")
 
@@ -407,6 +413,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3125, -0.25, -1.25)
 
 [node name="cylinder3" type="MeshInstance3D" parent="uma/body/hl_leg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0625, -0.75, -0.0625)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_i142d")
 skeleton = NodePath("")
 
@@ -415,6 +422,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, -0.25, -1.25)
 
 [node name="cylinder4" type="MeshInstance3D" parent="uma/body/hr_leg"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0, 0)
+material_override = ExtResource("2_nbkge")
 mesh = SubResource("ArrayMesh_6a1t1")
 skeleton = NodePath("")
 
