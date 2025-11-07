@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c271a1lw68kf3"]
+
+[ext_resource type="PackedScene" uid="uid://px11iv1bxigu" path="res://models/door corn.gltf" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://bacncliuhv3x4" path="res://scenes/door.gd" id="2_83dcw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hpvv5"]
+size = Vector3(1.9, 2.8589416, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_la1wf"]
+size = Vector3(1.5, 1.0166321, 2)
+
+[node name="Door" instance=ExtResource("1_hpvv5")]
+script = ExtResource("2_83dcw")
+
+[node name="AnimationPlayer" parent="." index="2"]
+unique_name_in_owner = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4612764, 0)
+shape = SubResource("BoxShape3D_hpvv5")
+
+[node name="DoorCam" type="Camera3D" parent="." index="4"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.96637154, 0.25714964, 0, -0.25714964, 0.96637154, 0, 2.5338788, 5.02637)
+
+[node name="Area3D" type="Area3D" parent="." index="5"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40601933, 0.98075616)
+shape = SubResource("BoxShape3D_la1wf")
+
+[node name="Marker3D" type="Marker3D" parent="." index="6"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9900397)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

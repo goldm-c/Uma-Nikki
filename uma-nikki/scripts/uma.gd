@@ -19,6 +19,14 @@ var _last_movement_direction := Vector3.BACK
 @onready var _uma: Node3D = %uma
 @onready var _anim: AnimationPlayer = %AnimationPlayer
 
+func makeUmaCameraCurrent():
+	if first_person: 
+		first_person = false
+		_camera.make_current()
+	else: 
+		first_person = true
+		_camera_1p.make_current()
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -30,13 +38,7 @@ func _input(event: InputEvent) -> void:
 		else: running = 1.0
 		
 	if event.is_action_pressed("camera_switch"):
-		if first_person: 
-			first_person = false
-			_camera.make_current()
-		else: 
-			first_person = true
-			_camera_1p.make_current()
-		
+		makeUmaCameraCurrent()
 
 func _unhandled_input(event: InputEvent) -> void: #Do not move camera when tabbed out.
 	var is_camera_motion := (

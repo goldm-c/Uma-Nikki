@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://nc7ybiv87k3o"]
+[gd_scene load_steps=23 format=3 uid="uid://nc7ybiv87k3o"]
 
 [ext_resource type="AudioStream" uid="uid://ub20wnqv7gcd" path="res://audio/rain.ogg" id="1_655l2"]
+[ext_resource type="PackedScene" uid="uid://c271a1lw68kf3" path="res://scenes/door.tscn" id="2_rwgxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yn3el"]
 sky_top_color = Color(0.552941, 0.572549, 0.607843, 1)
@@ -124,6 +125,7 @@ transform = Transform3D(0.926863, -0.0796386, -0.366855, 0.375399, 0.196628, 0.9
 mesh = SubResource("PlaneMesh_604j3")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.058178574, 0)
 size = Vector3(52.61, 0, 50)
 
 [node name="RainParticle" type="GPUParticles3D" parent="."]
@@ -171,3 +173,6 @@ mesh = SubResource("BoxMesh_f3sb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
 shape = SubResource("BoxShape3D_f3sb7")
+
+[node name="Door_MaizeDomain" parent="." instance=ExtResource("2_rwgxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
