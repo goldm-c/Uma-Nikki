@@ -9,9 +9,12 @@ extends CharacterBody3D
 @export var acceleration = 40.0
 @export var rotation_speed := 10.0
 @export var first_person := false
+@export var jump_strength := 12.0
 
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.BACK
+var gravity := -30.0
+var fall_anim_started = false
 
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera: Camera3D = %UmaCamera
@@ -31,7 +34,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
-	if event.is_action_pressed("space"):
+	if event.is_action_pressed("shift"):
 		if running == 1.0: running = 2.5
 		else: running = 1.0
 		
@@ -70,17 +73,36 @@ func _physics_process(delta: float) -> void:
 	var move_direction := forward * raw_input.y + right * raw_input.x
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized()
-
+	
+	#Store vertical velocity
+	var y_velocity := velocity.y
+	velocity.y = 0
+	#Calculate horizontal velocity
 	velocity = velocity.move_toward(move_direction * move_speed * running, acceleration * delta)
+	#Calculate vertical velocity
+	velocity.y = y_velocity + gravity * delta
 	move_and_slide()
+	
+	var is_starting_jump := Input.is_action_just_pressed("space") and is_on_floor()
+	if is_starting_jump:
+		velocity.y += jump_strength
+	
 	#Horse rotation.
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
 	_uma.global_rotation.y = lerp_angle(_uma.rotation.y, target_angle, rotation_speed * delta)
+	
 	#Animation
 	var ground_speed := velocity.length()
-	if ground_speed > 0.0:
-		_anim.play("walking", -1, running * 1.3)
-	else:
-		_anim.stop()
+	if is_starting_jump:
+		_anim.play("jumping")
+	elif not is_on_floor() and not fall_anim_started and velocity.y < 0:
+		_anim.play("falling", -1, 0.7)
+		fall_anim_started = true
+	elif is_on_floor():
+		fall_anim_started = false
+		if ground_speed > 0.0:
+			_anim.play("walking", -1, running * 1.3)
+		else:
+			_anim.play("uma_RESET")

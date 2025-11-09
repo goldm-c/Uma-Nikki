@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://nc7ybiv87k3o"]
+[gd_scene load_steps=28 format=3 uid="uid://nc7ybiv87k3o"]
 
 [ext_resource type="AudioStream" uid="uid://ub20wnqv7gcd" path="res://audio/rain.ogg" id="1_655l2"]
 [ext_resource type="PackedScene" uid="uid://c271a1lw68kf3" path="res://scenes/door.tscn" id="2_rwgxs"]
@@ -27,6 +27,9 @@ albedo_color = Color(0.529412, 0.537255, 0.588235, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_604j3"]
 material = SubResource("StandardMaterial3D_tvk4x")
 size = Vector2(200, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rwgxs"]
+size = Vector3(200, 1, 200)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vfy6s"]
 emission_shape_offset = Vector3(25, 15, 25)
@@ -101,17 +104,29 @@ inner_radius = 0.578
 rings = 8
 ring_segments = 4
 
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(3, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3sb7"]
+size = Vector3(3, 1, 4)
+
 [sub_resource type="BoxMesh" id="BoxMesh_fj7yv"]
 size = Vector3(1, 8, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj7yv"]
 size = Vector3(1, 8, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
-size = Vector3(3, 1, 4)
+[sub_resource type="BoxMesh" id="BoxMesh_rwgxs"]
+size = Vector3(3, 4, 3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_f3sb7"]
-size = Vector3(3, 1, 4)
+[sub_resource type="BoxShape3D" id="BoxShape3D_4wyf3"]
+size = Vector3(3, 4, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4wyf3"]
+size = Vector3(3, 200, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0juu"]
+size = Vector3(3, 200, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -127,6 +142,12 @@ mesh = SubResource("PlaneMesh_604j3")
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.058178574, 0)
 size = Vector3(52.61, 0, 50)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_rwgxs")
 
 [node name="RainParticle" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8554, 3.61007, -21.0975)
@@ -155,24 +176,47 @@ stream = ExtResource("1_655l2")
 volume_db = -6.558
 autoplay = true
 
-[node name="Block2" type="MeshInstance3D" parent="."]
+[node name="Collision test" type="Node" parent="."]
+
+[node name="Block" type="MeshInstance3D" parent="Collision test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4641123, 0.18620014, 0)
+mesh = SubResource("BoxMesh_f3sb7")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Collision test/Block"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision test/Block/StaticBody3D"]
+shape = SubResource("BoxShape3D_f3sb7")
+
+[node name="Block2" type="MeshInstance3D" parent="Collision test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.052966, 3.5937247, 6.5878415)
 mesh = SubResource("BoxMesh_fj7yv")
 skeleton = NodePath("../Block")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Block2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Collision test/Block2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision test/Block2/StaticBody3D"]
 shape = SubResource("BoxShape3D_fj7yv")
 
-[node name="Block" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4641123, 0.18620014, 0)
-mesh = SubResource("BoxMesh_f3sb7")
+[node name="Block3" type="MeshInstance3D" parent="Collision test"]
+transform = Transform3D(0.70710677, 0.49999997, 0.49999997, 0, 0.70710677, -0.70710677, -0.70710677, 0.49999997, 0.49999997, 20.168703, 0.18620014, 0)
+mesh = SubResource("BoxMesh_rwgxs")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Block"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Collision test/Block3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
-shape = SubResource("BoxShape3D_f3sb7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision test/Block3/StaticBody3D"]
+shape = SubResource("BoxShape3D_4wyf3")
+
+[node name="Block4" type="MeshInstance3D" parent="Collision test"]
+transform = Transform3D(0.70710677, 0.49999997, 0.49999997, 0, 0.70710677, -0.70710677, -0.70710677, 0.49999997, 0.49999997, 31.886065, 46.142586, 0)
+mesh = SubResource("BoxMesh_4wyf3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Collision test/Block4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision test/Block4/StaticBody3D"]
+shape = SubResource("BoxShape3D_k0juu")
 
 [node name="Door_MaizeDomain" parent="." instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
