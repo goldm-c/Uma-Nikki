@@ -54,6 +54,9 @@ func _unhandled_input(event: InputEvent) -> void: #Do not move camera when tabbe
 	)
 	if is_camera_motion:
 		_camera_input_direction = event.screen_relative * mouse_sensitivity
+		
+func _ready() -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	_camera_pivot.rotation.x -= _camera_input_direction.y * delta
@@ -88,13 +91,17 @@ func _physics_process(delta: float) -> void:
 		velocity.y += jump_strength
 	
 	#Horse rotation.
+	var collision_angle = get_floor_normal() * move_direction
+
 	if move_direction.length() > 0.2:
 		_last_movement_direction = move_direction
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
-	_uma.global_rotation.y = lerp_angle(_uma.rotation.y, target_angle, rotation_speed * delta)
 	
+	_uma.global_rotation.y = lerp_angle(_uma.rotation.y, target_angle, rotation_speed * delta)
+	_uma.global_rotation.x = lerp(_uma.global_rotation.x, collision_angle.x + collision_angle.z, rotation_speed * delta)
 	#Animation
 	var ground_speed := velocity.length()
+	
 	if is_starting_jump:
 		_anim.play("jumping")
 	elif not is_on_floor() and not fall_anim_started and velocity.y < 0:
