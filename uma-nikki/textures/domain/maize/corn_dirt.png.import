@@ -2,23 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr22qqhkwkuv1"
-path="res://.godot/imported/uma corn_0.png-f75f16ff1b7688713657d4c1c99a857e.ctex"
+uid="uid://bfp2eiu237iid"
+path.s3tc="res://.godot/imported/corn_dirt.png-c49b5686b25a4fd3c45c44d73d2859d4.s3tc.ctex"
 metadata={
-"vram_texture": false
-}
-generator_parameters={
-"md5": "03d98a68c75292b6500e086f6106d27f"
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://textures/uma corn_0.png"
-dest_files=["res://.godot/imported/uma corn_0.png-f75f16ff1b7688713657d4c1c99a857e.ctex"]
+source_file="res://textures/domain/maize/corn_dirt.png"
+dest_files=["res://.godot/imported/corn_dirt.png-c49b5686b25a4fd3c45c44d73d2859d4.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://poi6bqcm6plw"
+path="res://.godot/imported/Maize Domain.ogg-c686a265626d1756c97ba24e313e9937.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/Maize Domain.ogg"
+dest_files=["res://.godot/imported/Maize Domain.ogg-c686a265626d1756c97ba24e313e9937.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

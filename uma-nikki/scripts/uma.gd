@@ -98,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
 	
 	_uma.global_rotation.y = lerp_angle(_uma.rotation.y, target_angle, rotation_speed * delta)
-	_uma.global_rotation.x = lerp(_uma.global_rotation.x, collision_angle.x + collision_angle.z, rotation_speed * delta)
+	_uma.global_rotation.x = lerp_angle(_uma.global_rotation.x, collision_angle.x + collision_angle.z, rotation_speed * delta)
 	#Animation
 	var ground_speed := velocity.length()
 	

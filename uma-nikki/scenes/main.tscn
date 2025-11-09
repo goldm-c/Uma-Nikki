@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dab0qrcuyc21w"]
+[gd_scene load_steps=5 format=3 uid="uid://dab0qrcuyc21w"]
 
-[ext_resource type="PackedScene" uid="uid://nc7ybiv87k3o" path="res://scenes/world.tscn" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://c8eywfti2slb7" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://ficbtc5b2qt8" path="res://scenes/uma.tscn" id="2_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://drflp18kb1bgm" path="res://models/uma corn.gltf" id="3_tefeu"]
 [ext_resource type="Script" uid="uid://hbm4et70i572" path="res://scripts/fps.gd" id="4_o6xl0"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
-size = Vector3(0.63635254, 1.6635742, 1)
+[ext_resource type="PackedScene" uid="uid://bmjdatuoknt8h" path="res://scenes/maize_domain.tscn" id="5_tbgi4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_tbgi4")
@@ -23,17 +19,8 @@ script = ExtResource("4_o6xl0")
 [node name="Node3D" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="World" parent="Node3D" instance=ExtResource("1_jyhfs")]
-
 [node name="Uma" parent="Node3D" instance=ExtResource("2_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="blockbench_export" parent="Node3D" instance=ExtResource("3_tefeu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D/blockbench_export"]
-collision_layer = 2
-
-[node name="UmaCollision" type="CollisionShape3D" parent="Node3D/blockbench_export/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.035238266, 0.907, -0.33196044)
-shape = SubResource("BoxShape3D_1bvp3")
+[node name="map" parent="." instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)

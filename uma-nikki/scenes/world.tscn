@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://nc7ybiv87k3o"]
 
-[ext_resource type="AudioStream" uid="uid://ub20wnqv7gcd" path="res://audio/rain.ogg" id="1_655l2"]
+[ext_resource type="AudioStream" uid="uid://ub20wnqv7gcd" path="res://audio/bgs/rain.ogg" id="1_655l2"]
 [ext_resource type="PackedScene" uid="uid://c271a1lw68kf3" path="res://scenes/door.tscn" id="2_rwgxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yn3el"]
