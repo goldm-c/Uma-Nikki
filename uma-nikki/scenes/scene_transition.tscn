@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgofmu6rvi8ns"]
+
+[ext_resource type="Shader" uid="uid://dbr5ldimsru3m" path="res://shaders/map_transition_circle.gdshader" id="1_0wykx"]
+[ext_resource type="Script" uid="uid://brgt5jgc5qily" path="res://scenes/scene_transition.gd" id="1_rujfs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rujfs"]
+shader = ExtResource("1_0wykx")
+shader_parameter/circle_size = 0.7150000339625
+
+[sub_resource type="Animation" id="Animation_0wykx"]
+resource_name = "circle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7150000339625, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rujfs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7150000339625]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2sgj6"]
+_data = {
+&"RESET": SubResource("Animation_rujfs"),
+&"circle": SubResource("Animation_0wykx")
+}
+
+[node name="SceneTransition" type="CanvasLayer"]
+script = ExtResource("1_rujfs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_rujfs")
+offset_top = -233.0
+offset_right = 1150.0
+offset_bottom = 917.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_2sgj6")
+}

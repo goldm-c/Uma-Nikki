@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bmjdatuoknt8h"]
+[gd_scene load_steps=22 format=3 uid="uid://bmjdatuoknt8h"]
 
 [ext_resource type="PackedScene" uid="uid://bsaudig5a7uk5" path="res://models/maize domain 2.gltf" id="1_8m606"]
 [ext_resource type="Texture2D" uid="uid://pchmf3y2riwm" path="res://textures/domain/maize/wood.png" id="2_g1jvk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://y6xi4mmwwx1w" path="res://textures/domain/maize/corn_side.png" id="4_qnoov"]
 [ext_resource type="Texture2D" uid="uid://b7g4im5t5nvw5" path="res://textures/domain/maize/corn_top.png" id="5_msqk8"]
 [ext_resource type="AudioStream" uid="uid://poi6bqcm6plw" path="res://audio/music/Maize Domain.ogg" id="6_g1jvk"]
+[ext_resource type="Material" uid="uid://8amwhdn8fmgw" path="res://materials/corn_detail_1.tres" id="6_msqk8"]
 [ext_resource type="PackedScene" uid="uid://c271a1lw68kf3" path="res://scenes/door.tscn" id="7_jb75r"]
 [ext_resource type="PackedScene" uid="uid://drflp18kb1bgm" path="res://models/uma corn.gltf" id="8_qnoov"]
 
@@ -26,6 +27,12 @@ texture_filter = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spks1"]
 albedo_texture = ExtResource("5_msqk8")
 texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kd51a"]
+lightmap_size_hint = Vector2i(12, 12)
+material = ExtResource("6_msqk8")
+size = Vector2(1, 1)
+orientation = 0
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jb75r"]
 
@@ -57,6 +64,7 @@ volumetric_fog_sky_affect = 0.366
 size = Vector3(0.63635254, 1.6635742, 1)
 
 [node name="map" instance=ExtResource("1_8m606")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.188648, 0)
 
 [node name="platform" parent="." index="0"]
 material_override = SubResource("StandardMaterial3D_h4u5c")
@@ -71,13 +79,31 @@ material_override = SubResource("StandardMaterial3D_6m833")
 [node name="corn top" parent="." index="3"]
 material_override = SubResource("StandardMaterial3D_spks1")
 
-[node name="Area3D" type="Area3D" parent="." index="4"]
+[node name="corn detail" type="MeshInstance3D" parent="." index="4"]
+
+[node name="detail 1" type="MeshInstance3D" parent="corn detail" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.073364, 9.373158, 0)
+mesh = SubResource("PlaneMesh_kd51a")
+
+[node name="detail 2" type="MeshInstance3D" parent="corn detail" index="1"]
+transform = Transform3D(-0.08663418, 0, -0.9962402, 0, 1, 0, 0.9962402, 0, -0.08663418, -15.073364, 9.373158, 7.357992)
+mesh = SubResource("PlaneMesh_kd51a")
+
+[node name="detail 3" type="MeshInstance3D" parent="corn detail" index="2"]
+transform = Transform3D(0.7322695, 0, -0.6810149, 0, 1, 0, 0.6810149, 0, 0.7322695, -15.073364, 9.373158, 12.832666)
+mesh = SubResource("PlaneMesh_kd51a")
+
+[node name="detail 4" type="MeshInstance3D" parent="corn detail" index="3"]
+transform = Transform3D(0.02082029, 0, -0.99978316, 0, 1, 0, 0.99978316, 0, 0.02082029, -15.073364, 9.373158, -10.537325)
+mesh = SubResource("PlaneMesh_kd51a")
+
+[node name="Area3D" type="Area3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24.773993, 0)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("WorldBoundaryShape3D_jb75r")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="5"]
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.684788, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="0"]
@@ -88,33 +114,33 @@ shape = SubResource("ConcavePolygonShape3D_g1jvk")
 transform = Transform3D(4.3888836, 0, 0, 0, 3.1545315, 0, 0, 0, 4.3888836, -77.2587, -26.196024, 59.016373)
 shape = SubResource("ConcavePolygonShape3D_jb75r")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource("6_g1jvk")
 volume_db = -6.558
 autoplay = true
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="7"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="8"]
 transform = Transform3D(0.9892801, -0.030979563, -0.14270696, 0.13942228, 0.49102724, 0.85991514, 0.043433197, -0.8705934, 0.49008244, 0, 20.05705, 0)
 light_color = Color(0.7316267, 0.76, 0.6992, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="8"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="9"]
 environment = SubResource("Environment_jb75r")
 
-[node name="Door" parent="." index="9" instance=ExtResource("7_jb75r")]
+[node name="Door" parent="." index="10" instance=ExtResource("7_jb75r")]
 transform = Transform3D(0.71447265, 0, -0.69966334, 0, 1, 0, 0.69966334, 0, 0.71447265, -49.267952, 5.807007, 19.969643)
 
-[node name="Door2" parent="." index="10" instance=ExtResource("7_jb75r")]
+[node name="Door2" parent="." index="11" instance=ExtResource("7_jb75r")]
 transform = Transform3D(-0.33936185, 0, -0.9406559, 0, 1, 0, 0.9406559, 0, -0.33936185, 53.42662, 5.807007, 42.07256)
 
-[node name="Door3" parent="." index="11" instance=ExtResource("7_jb75r")]
+[node name="Door3" parent="." index="12" instance=ExtResource("7_jb75r")]
 transform = Transform3D(0.762499, 0, -0.6469894, 0, 1, 0, 0.6469894, 0, 0.762499, 22.523964, 5.8304453, -35.110184)
 
-[node name="blockbench_export" parent="." index="12" instance=ExtResource("8_qnoov")]
+[node name="corn_horse" parent="." index="13" instance=ExtResource("8_qnoov")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5.8091063, -8.578238)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="blockbench_export" index="7"]
+[node name="StaticBody3D" type="StaticBody3D" parent="corn_horse" index="7"]
 collision_layer = 2
 
-[node name="UmaCollision" type="CollisionShape3D" parent="blockbench_export/StaticBody3D" index="0"]
+[node name="UmaCollision" type="CollisionShape3D" parent="corn_horse/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.035238266, 0.907, -0.33196044)
 shape = SubResource("BoxShape3D_msqk8")
