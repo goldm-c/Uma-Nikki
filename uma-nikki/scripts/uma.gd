@@ -34,6 +34,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
+	if event.is_action_pressed("f2"):
+		self.global_position = Vector3(0, 0, 0)
+		
 	if event.is_action_pressed("shift"):
 		if running == 1.0: running = 2.5
 		else: running = 1.0

@@ -3,7 +3,7 @@ extends Node
 @onready var map: Node3D = $Map
 @onready var _2d_scene: Node2D
 
-var current_3d_scene
+var current_3d_scene = "nexus"
 var current_2d_scene
 
 func change_map(new_map: String) -> void:
@@ -15,7 +15,12 @@ func change_map(new_map: String) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("f3"):
-		change_map("res://scenes/maize_domain.tscn")
+		if current_3d_scene == "nexus":
+			change_map("res://scenes/maize_domain.tscn")
+			current_3d_scene = "maize"
+		else:
+			change_map("res://scenes/nexus.tscn")
+			current_3d_scene = "nexus"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
