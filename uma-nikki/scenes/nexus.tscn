@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://nc7ybiv87k3o"]
+[gd_scene load_steps=32 format=3 uid="uid://nc7ybiv87k3o"]
 
 [ext_resource type="AudioStream" uid="uid://ub20wnqv7gcd" path="res://audio/bgs/rain.ogg" id="1_c3d7h"]
 [ext_resource type="PackedScene" uid="uid://c271a1lw68kf3" path="res://scenes/door.tscn" id="2_4or7x"]
+[ext_resource type="Script" uid="uid://tv00urmkq2us" path="res://scenes/borders.gd" id="3_4or7x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yn3el"]
 sky_top_color = Color(0.552941, 0.572549, 0.607843, 1)
@@ -128,6 +129,15 @@ size = Vector3(3, 200, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0juu"]
 size = Vector3(3, 200, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bjl5e"]
+size = Vector3(200, 200, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4or7x"]
+size = Vector3(5, 200, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbibw"]
+size = Vector3(5, 200, 200)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -156,7 +166,7 @@ sub_emitter = NodePath("../PuddleParticle")
 lifetime = 0.7
 fixed_fps = 90
 collision_base_size = 0.1
-visibility_aabb = AABB(-4, -4, -4, 50, 20, 50)
+visibility_aabb = AABB(-13, -4, -13, 70, 20, 70)
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_vfy6s")
 draw_pass_1 = SubResource("RibbonTrailMesh_8fdn5")
@@ -230,3 +240,35 @@ shape = SubResource("BoxShape3D_4wyf3")
 
 [node name="Door_MaizeDomain" parent="." instance=ExtResource("2_4or7x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("3_4or7x")
+
+[node name="North" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -65)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/North"]
+shape = SubResource("BoxShape3D_bjl5e")
+
+[node name="East" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/East"]
+shape = SubResource("BoxShape3D_4or7x")
+
+[node name="South" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/South"]
+shape = SubResource("BoxShape3D_bjl5e")
+
+[node name="West" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/West"]
+shape = SubResource("BoxShape3D_wbibw")
+
+[connection signal="body_entered" from="Node3D/North" to="Node3D" method="_on_north_body_entered"]
+[connection signal="body_entered" from="Node3D/East" to="Node3D" method="_on_east_body_entered"]
+[connection signal="body_entered" from="Node3D/South" to="Node3D" method="_on_south_body_entered"]
+[connection signal="body_entered" from="Node3D/West" to="Node3D" method="_on_west_body_entered"]

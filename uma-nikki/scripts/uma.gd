@@ -27,6 +27,9 @@ func makeUmaCameraCurrent():
 		_camera_1p.make_current()
 	else: 
 		_camera.make_current()
+		
+func respawn():
+	self.global_position = Vector3(0, 0, 0)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
@@ -35,7 +38,7 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 	if event.is_action_pressed("f2"):
-		self.global_position = Vector3(0, 0, 0)
+		respawn()
 		
 	if event.is_action_pressed("shift"):
 		if running == 1.0: running = 2.5
@@ -47,7 +50,6 @@ func _input(event: InputEvent) -> void:
 			makeUmaCameraCurrent()
 		else: 
 			first_person = true
-			print("blaarr")
 			makeUmaCameraCurrent()
 
 func _unhandled_input(event: InputEvent) -> void: #Do not move camera when tabbed out.

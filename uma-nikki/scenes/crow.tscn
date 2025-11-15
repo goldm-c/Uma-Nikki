@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://crna6lrm0hn84"]
+
+[ext_resource type="Script" uid="uid://cp8ppmcfi34w" path="res://scenes/crow.gd" id="1_ay1ma"]
+[ext_resource type="Texture2D" uid="uid://b3n5q4xn45jxs" path="res://textures/domain/maize/crow.png" id="1_wdbtq"]
+[ext_resource type="AudioStream" uid="uid://dyvce0asuwhrk" path="res://audio/sfx/caw.ogg" id="2_yvota"]
+[ext_resource type="Texture2D" uid="uid://c6j8fx4rxoikv" path="res://textures/domain/maize/crow 2.png" id="4_mbwsl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ay1ma"]
+radius = 2.4
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ay1ma")
+
+[node name="crow_sound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_yvota")
+volume_db = -2.0
+unit_size = 5.0
+
+[node name="crow_standing" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_wdbtq")
+
+[node name="crow_flying" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+visible = false
+billboard = 2
+texture_filter = 0
+texture = ExtResource("4_mbwsl")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ay1ma")
